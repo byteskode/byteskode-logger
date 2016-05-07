@@ -6,6 +6,7 @@ byteskode-logger
 byteskode winston logger utility
 
 *Note: logger is configured using [config](https://github.com/lorenwest/node-config)*
+
 *Note: Ensure mongoose connection if you want to utilize mongoose transport*
 
 ## Installation
