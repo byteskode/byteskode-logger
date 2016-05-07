@@ -5,6 +5,9 @@ byteskode-logger
 
 byteskode winston logger utility
 
+*Note: logger is configured using [config](https://github.com/lorenwest/node-config)*
+*Note: Ensure mongoose connection if you want to utilize mongoose transport*
+
 ## Installation
 ```sh
 $ npm install --save byteskode-logger
@@ -14,8 +17,7 @@ $ npm install --save byteskode-logger
 
 ```javascript
 var mongoose = require('mongoose');
-var logger = require('byteskode-logger', <options>);
-var Schema = mongoose.Schema;
+var logger = require('byteskode-logger');
 ...
 
 ```
