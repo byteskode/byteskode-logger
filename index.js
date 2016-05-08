@@ -22,7 +22,7 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var environment = require('execution-environment');
 var LogSchema = require(path.join(__dirname, 'lib', 'schema'));
-require(path.join(__dirname, 'lib', 'mongoose_transport'));
+var MongooseTransport = require(path.join(__dirname, 'lib', 'mongoose_transport'));
 var transports = [];
 
 //NOTE: all logger configuration are loaded from config
@@ -63,16 +63,23 @@ if (environment.isLocal()) {
 
 
 //production logger(s)
+MongooseTransport.model = exports.config.mongoose.model;
+exports.MongooseTransport = MongooseTransport;
+
 
 //mongoose logger transports
 if (!environment.isLocal() && exports.config.mongoose) {
 
     // initialize mongoose log model
     var modelName = exports.config.mongoose.model;
-    if (!mongoose.model(modelName)) {
+    try {
+        if (!mongoose.model(modelName)) {
+            exports.Log = mongoose.model(modelName, LogSchema);
+        } else {
+            exports.Log = mongoose.model(modelName);
+        }
+    } catch (e) {
         exports.Log = mongoose.model(modelName, LogSchema);
-    } else {
-        exports.Log = mongoose.model(modelName);
     }
 
     transports.push(new(winston.transports.Mongoose)(exports.config.mongoose));
