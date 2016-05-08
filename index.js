@@ -71,6 +71,8 @@ if (!environment.isLocal() && exports.config.mongoose) {
     var modelName = exports.config.mongoose.model;
     if (!mongoose.model(modelName)) {
         exports.Log = mongoose.model(modelName, LogSchema);
+    } else {
+        exports.Log = mongoose.model(modelName);
     }
 
     transports.push(new(winston.transports.Mongoose)(exports.config.mongoose));
