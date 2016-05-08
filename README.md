@@ -18,7 +18,25 @@ $ npm install --save byteskode-logger
 
 ```javascript
 var mongoose = require('mongoose');
-var logger = require('byteskode-logger');
+
+//connect to mongoose if production environment
+
+var Logger = require('byteskode-logger');
+
+//obtain winston logger instance
+var winston = Logger.logger;
+
+//use winston logger instance
+winston.info('<message>',{<metadata>});
+winston.debug('<message>',{<metadata>});
+winston.error('<message>',{<metadata>});
+winston.warn('<message>',{<metadata>});
+
+//use logger Log mongoose model(available only in production environment)
+var Log = Logger.Log;
+
+//use Log as other mongoose model
+Log.find({}).exec(fn);
 ...
 
 ```
