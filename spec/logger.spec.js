@@ -5,10 +5,14 @@ process.env.NODE_ENV = 'production';
 //dependencies
 var path = require('path');
 var expect = require('chai').expect;
-var helpers = require('winston/test/helpers');
-var logger = require(path.join(__dirname, '..')).logger;
+var Logger = require(path.join(__dirname, '..'));
+var logger = Logger.logger;
 
-describe('mongoose transport', function() {
+describe('byteskode logger', function() {
+
+    it('should expose mongoose Log model', function() {
+        expect(Logger.Log).to.exist;
+    });
 
     it('should have the proper methods defined', function() {
         expect(logger.log).to.be.a.function;
@@ -16,12 +20,8 @@ describe('mongoose transport', function() {
 
 
     describe.skip('the log() method', function() {
-        it('should respond with true', function() {
-            helpers.testNpmLevels(logger, function(ign, error, logged) {
-                console.log(logged);
-                expect(error).to.be.null;
-                expect(logged).to.not.be.null;
-            });
+        it('should respond with true', function(done) {
+            done();
         });
     });
 
