@@ -1,7 +1,7 @@
 byteskode-logger
 =====================
 
-[![Build Status](https://travis-ci.org/lykmapipo/byteskode-logger.svg?branch=master)](https://travis-ci.org/lykmapipo/byteskode-logger)
+[![Build Status](https://travis-ci.org/byteskode/byteskode-logger.svg?branch=master)](https://travis-ci.org/byteskode/byteskode-logger)
 
 byteskode winston logger utility
 
