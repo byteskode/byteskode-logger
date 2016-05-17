@@ -67,20 +67,22 @@ MongooseTransport.model = exports.config.mongoose.model;
 exports.MongooseTransport = MongooseTransport;
 
 
+
+// initialize mongoose log model
+var modelName = exports.config.mongoose.model;
+try {
+    if (!mongoose.model(modelName)) {
+        exports.Log = mongoose.model(modelName, LogSchema);
+    } else {
+        exports.Log = mongoose.model(modelName);
+    }
+} catch (e) {
+    exports.Log = mongoose.model(modelName, LogSchema);
+}
+
+
 //mongoose logger transports
 if (!environment.isLocal() && exports.config.mongoose) {
-
-    // initialize mongoose log model
-    var modelName = exports.config.mongoose.model;
-    try {
-        if (!mongoose.model(modelName)) {
-            exports.Log = mongoose.model(modelName, LogSchema);
-        } else {
-            exports.Log = mongoose.model(modelName);
-        }
-    } catch (e) {
-        exports.Log = mongoose.model(modelName, LogSchema);
-    }
 
     transports.push(new(winston.transports.Mongoose)(exports.config.mongoose));
 }
