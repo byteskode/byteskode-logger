@@ -83,7 +83,6 @@ try {
 
 //mongoose logger transports
 if (!environment.isLocal() && exports.config.mongoose) {
-
     transports.push(new(winston.transports.Mongoose)(exports.config.mongoose));
 }
 
